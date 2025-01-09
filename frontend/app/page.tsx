@@ -1,34 +1,83 @@
 "use client";
-import { useEffect, useState } from "react";
+import DuaCard from "@/components/DuaCard";
+import { useEffect, useState, useRef } from "react";
 
-interface Category {
-  cat_icon: string;
-  cat_id: number;
-  cat_name_bn: string;
-  cat_name_en: string;
+interface Dua {
   id: number;
-  no_of_dua: number;
-  no_of_subcat: number;
+  dua_id: number;
+  cat_id: number;
+  subcat_id: number;
+  audio?: string;
+  bottom_bn?: string;
+  bottom_en?: string;
+  clean_arabic?: string;
+  dua_arabic?: string;
+  dua_indopak?: string;
+  dua_name_bn?: string;
+  dua_name_en?: string;
+  refference_bn?: string;
+  refference_en?: string;
+  top_bn?: string;
+  top_en?: string;
+  translation_bn?: string;
+  translation_en?: string;
+  transliteration_bn?: string;
+  transliteration_en?: string;
 }
+
+interface SubCategory {
+  id: number;
+  cat_id: number;
+  subcat_id: number;
+  subcat_name_bn: string;
+  subcat_name_en: string;
+  no_of_dua: number;
+}
+
 export default function Home() {
-  const [categories, setCategories] = useState<Category[]>();
+  const [duas, setDuas] = useState<Dua[]>([]);
+  const [subCategories, setSubCategories] = useState<SubCategory[]>([]);
+
+  const previousSubcategoryIdRef = useRef<number | null>(0);
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/categories`)
-      .then((res) => res.json())
-      .then((data) => setCategories(data));
+    const fetchSubCategories = async () => {
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/duas`);
+        const data: Dua[] = await res.json();
+        setDuas(data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchSubCategories(); // Call the async function
   }, []);
-  console.log(categories);
+  useEffect(() => {
+    const fetchSubCategories = async () => {
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/subcategories`);
+        const data: SubCategory[] = await res.json();
+        setSubCategories(data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchSubCategories(); 
+  }, []);
+
+  // console.log(duas);
 
   return (
-    <div>
-      <h1>Categories</h1>
-      <ul>
-        {categories?.map((category) => (
-          <li key={category.id}>
-            {category.cat_name_en} ({category.no_of_dua})
-          </li>
-        ))}
-      </ul>
+    <div className="flex flex-col gap-4 h-[80vh] overflow-y-auto">
+      {duas.map((dua, index) => (
+        <DuaCard
+          key={`${dua.dua_id}_${index}`}
+          dua={dua}
+          subCategories={subCategories}
+          previousSubcategoryIdRef={previousSubcategoryIdRef}
+        />
+      ))}
     </div>
   );
 }
