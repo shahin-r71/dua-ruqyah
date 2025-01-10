@@ -1,6 +1,9 @@
-import express from 'express';
-import cors from 'cors';
-import db from './db.js';
+// import express from 'express';
+const express =require("express")
+// import cors from 'cors';
+const cors =require("cors")
+const db =require("./db.js")
+// import db from './db.js';
 
 const app = express();
 app.use(cors());

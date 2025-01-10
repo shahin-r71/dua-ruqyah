@@ -1,15 +1,11 @@
-import sqlite3 from 'sqlite3';
-import path from 'path';
-import { fileURLToPath } from 'url';
+const sqlite3 = require('sqlite3');
+const path = require('path');
 
-sqlite3.verbose();
-
-// Emulate __dirname
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Path to  database file
+// Path to database file
 const dbPath = path.resolve(__dirname, 'dua_main.sqlite');
+
+// Enable verbose mode for SQLite3
+sqlite3.verbose();
 
 // Create a database connection
 const db = new sqlite3.Database(dbPath, (err) => {
@@ -20,4 +16,4 @@ const db = new sqlite3.Database(dbPath, (err) => {
   }
 });
 
-export default db;
+module.exports = db;
