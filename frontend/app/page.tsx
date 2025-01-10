@@ -69,7 +69,7 @@ export default function Home() {
   // console.log(duas);
 
   return (
-    <div className="flex flex-col gap-4 h-[77vh] overflow-y-auto">
+    <div className="flex flex-col gap-4 h-[76vh] overflow-y-auto">
       {duas.map((dua, index) => (
         <DuaCard
           key={`${dua.dua_id}_${index}`}

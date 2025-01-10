@@ -66,7 +66,7 @@ const DuaSidebar = () => {
     // console.log(categories);
     // console.log(subCategories);
   return (
-    <div className="w-[310px] h-[640px] bg-white overflow-y-auto rounded-3xl text-left ">
+    <div className="w-[310px] h-[620px] bg-white overflow-y-auto rounded-3xl text-left ">
       <div className="sticky top-0 bg-white z-20">
         <h2 className="text-lg font-semibold text-center bg-primary text-white py-3 rounded-md mb-4">
           Categories

@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} antialiased scroll-smooth`}>
-        <div className="min-h-screen p-10">
+        <div className="h-screen p-6">
           <NavSidebar />
           <Header />
           <SettingsSidebar />
