@@ -22,11 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} antialiased scroll-smooth`}>
-        <div className="h-screen p-6">
+        <div className="h-screen p-7">
           <NavSidebar />
           <Header />
           <SettingsSidebar />
-          <main className="ml-[130px] flex gap-4">
+          <main className="ml-[115px] flex gap-4">
             <DuaSidebar />
             {children}
           </main>

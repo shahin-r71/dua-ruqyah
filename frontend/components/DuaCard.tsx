@@ -59,7 +59,7 @@ export default function DuaCard({
   }, []);
 
   return (
-    <div className="p-3 max-w-4xl">
+    <div className="p-3 max-w-3xl">
       {isShowSectionHeader && (
         <div
           className="mb-6 bg-white rounded-lg shadow-sm border p-4"
